@@ -59,7 +59,7 @@ actions:
             password="{{ index .Object.data "password" | toString | b64dec }}"
             mongo_host="{{ index .Object.data "mongo_host" | toString | b64dec }}"
             port="{{ index .Object.data "port" | toString | b64dec }}"
-            restore_cmd="mongorestore --gzip --archive --drop --host $mongo_host --usernale $username --password $password --port $port --authenticationDatabase $auth_database"
+            restore_cmd="mongorestore --gzip --archive --drop --host $mongo_host --username $username --password $password --port $port --authenticationDatabase $auth_database"
             backup_file_path='rs_backup.gz'
             kopia_snap='{{ .ArtifactsIn.mongoBackup.KopiaSnapshot }}'
             kando location pull --profile '{{ toJson .Profile }}' --path "${backup_file_path}" --kopia-snapshot "${kopia_snap}" - | ${restore_cmd}
